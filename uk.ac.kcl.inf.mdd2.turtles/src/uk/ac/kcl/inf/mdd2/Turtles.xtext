@@ -43,19 +43,19 @@ enum TurnCommand:
 
 
 
-Addition returns Expression:
+Addition returns IntExpression:
   Multiplication ({Addition.left = current} "+" right += Multiplication)*
 ;
 
-Multiplication returns Expression:
+Multiplication returns IntExpression:
   Primary ({Multiplication.left = current} "*" right += Primary)*
 ;
 
-Primary returns Expression:
+Primary returns IntExpression:
   num = NumberLiteral | "(" Addition ")" 
 ;
 
-NumberLiteral: 
+NumberLiteral returns IntExpression: 
   value=INT | var = [VariableDeclaration] 
 ;
 
