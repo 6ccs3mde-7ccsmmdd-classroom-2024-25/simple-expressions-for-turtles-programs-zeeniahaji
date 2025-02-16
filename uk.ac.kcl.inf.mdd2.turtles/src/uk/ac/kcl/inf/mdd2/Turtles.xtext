@@ -42,7 +42,6 @@ enum TurnCommand:
 ;
 
 
-
 Addition returns IntExpression:
   Multiplication ({Addition.left = current} "+" right += Multiplication)*
 ;
@@ -52,10 +51,10 @@ Multiplication returns IntExpression:
 ;
 
 Primary returns IntExpression:
-  num = NumberLiteral | "(" Addition ")" 
+  num = IntLiteral | "(" Addition ")" 
 ;
 
-NumberLiteral returns IntExpression: 
+IntLiteral returns IntExpression: 
   value=INT | var = [VariableDeclaration] 
 ;
 
