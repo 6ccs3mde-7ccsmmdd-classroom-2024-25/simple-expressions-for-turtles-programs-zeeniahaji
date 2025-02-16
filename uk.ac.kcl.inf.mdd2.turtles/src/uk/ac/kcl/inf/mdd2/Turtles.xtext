@@ -2,7 +2,6 @@ grammar uk.ac.kcl.inf.mdd2.Turtles with org.eclipse.xtext.common.Terminals
 
 generate turtles "http://www.ac.uk/kcl/inf/mdd2/Turtles"
 
-
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 TurtleProgram:
@@ -42,9 +41,25 @@ enum TurnCommand:
 	left | right
 ;
 
-IntExpression:
+IntExpression returns Expression:
 	val = INT |
-	var = [VariableDeclaration]
+	var = [VariableDeclaration] 
+;
+
+Addition returns Expression:
+  Multiplication ({Addition.left = current} '+' right += Multiplication)*
+;
+
+Multiplication returns Expression:
+  Primary  ({Multiplication.left = current} '*' right += Primary)*
+;
+
+Primary returns Expression:
+  NumberLiteral | '(' Addition ')' 
+;
+
+NumberLiteral: 
+  value=INT
 ;
 
 REAL returns ecore::EFloat hidden():
