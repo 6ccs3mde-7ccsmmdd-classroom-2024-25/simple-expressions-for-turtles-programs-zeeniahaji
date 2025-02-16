@@ -42,7 +42,7 @@ enum TurnCommand:
 ;
 
 IntExpression returns Expression:
-	val = INT |
+	val = Addition |
 	var = [VariableDeclaration] 
 ;
 
